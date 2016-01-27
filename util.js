@@ -50,9 +50,35 @@ function cloneObject(src) {var result ;//返回的复制后的结果。
  return result;
 }
 ------------------------------------------------------------------------------------------------------------------------------
-                
-                
-                
+  // 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组
+function uniqArray(arr) {
+    var a =[];      //创建新数组；
+    for(var i=0,l=arr.length,i<l,i++){
+       if(a.indexOf(arr[1])===-1){
+          a.push(arr[i]);   //添加到新数组；
+       }
+    }
+    return a;  //返回新数组；
+}              
+      
+// 实现一个遍历数组的方法，针对数组中每一个元素执行fn函数，并将数组索引和元素作为参数传递
+function each(arr, fn) {
+    for(var i=0,l=arr.length,i<l,i++){
+       fn(arr[i],i);
+    }
+}                
+   
+// 获取一个对象里面第一层元素的数量，返回一个整数
+function getObjectLength(obj) {
+   var count=0;
+   for(var i in Object){
+      if(object.hasOwnProperty(i)){
+         count ++;
+      }
+   }
+   return count;
+}
+             
                 
                 
                 
