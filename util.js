@@ -29,41 +29,40 @@ function isFunction(fn){
 --------------------------------------------------------------------------------------------------------------------
 // 使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝
 // 被复制的对象类型会被限制为数字、字符串、布尔、日期、数组、Object对象。不会包含函数、正则对象等
-function cloneObject(src) {var result ;//返回的复制后的结果。
-  if (typeof(src)==="object"){//对象为日期对象时直接赋值。
-    if(Object.prototype.toString.call(src)==="[object Date]"){
-        result = src;
-       }else{//判断对象的类型是Array还是Object。
-        result = (Object.prototype.toString.call(src)==="[object Array]")? [] : {};
-        for (var i in src){if (src.hasOwnProperty(i)) { //排除继承属性
-          if (typeof src[i] === "object") {
-             result[i] = cloneObject(src[i]); //递归赋值
-             } else {
-                result[i] = src[i]; //直接赋值
-                }
-               }
-              }
-             }
-  }else{
-   result = src;
+function cloneObject(src){
+  var  o;  //result
+  if(Object.prototype.toString.call(src)===“[object Array]”{
+   o = [ ]; //判断是否是数组，并赋初始值
+}  else {
+   o = { }；
+}
+  for (var i in src){
+  if(src.hasOwnProperty(i)){   //排除继承属性
+    if(typeof src[i]===“object”){
+         o[i]=cloneObject(src[i]);  //递归赋值
+       } else{
+         o[i]=src[i] ;//直接赋值
+       }
+    }
   }
- return result;
+return o;
 }
 ------------------------------------------------------------------------------------------------------------------------------
   // 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组
-function uniqArray(arr) {
-    var a =[];      //创建新数组；
-    for(var i=0,l=arr.length,i<l,i++){
-       if(a.indexOf(arr[1])===-1){
-          a.push(arr[i]);   //添加到新数组；
-       }
-    }
-    return a;  //返回新数组；
-}              
+function uniqArray(arr){
+    var  newArr = [ ]; //新建空数组
+    for(var i in arr){
+     if(newArr.indexOf(arr[i])==-1) {  //如果新数组不存在当前元素
+
+       newArr.push(arr[i]); //在新数组中加入当前元素
+      }
+   }
+   return newArr;    //返回新数组
+}
       
 // 实现一个遍历数组的方法，针对数组中每一个元素执行fn函数，并将数组索引和元素作为参数传递
 function each(arr, fn) {
-    for(var i=0,l=arr.length,i<l,i++){
+    for(var i in arr){
        fn(arr[i],i);
     }
 }                
